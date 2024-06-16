@@ -1,5 +1,5 @@
 import TestBot from "./permatecbot";
-import Utils from "../utils";
+import Utils from "../libs/utils";
 
 export default function ConfigFilters(bot: TestBot): void {
     bot.on("message:text", ctx => {
