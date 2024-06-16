@@ -1,0 +1,20 @@
+{
+  "name": "testing_world_bot-ts",
+  "version": "1.0.0",
+  "description": "A simple bot code in typescript",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node ./index.ts",
+    "dev": "ts-node-dev ./index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "grammy": "^1.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2"
+  }
+}
