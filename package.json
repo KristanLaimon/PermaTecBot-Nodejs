@@ -1,20 +1,22 @@
 {
-  "name": "testing_world_bot-ts",
-  "version": "1.0.0",
-  "description": "A simple bot code in typescript",
-  "main": "index.ts",
-  "scripts": {
-    "start": "ts-node ./source/index.ts",
-    "dev": "ts-node-dev ./source/index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "grammy": "^1.24.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.14.2"
-  }
+    "name": "testing_world_bot-ts",
+    "version": "1.0.0",
+    "description": "A simple bot code in typescript",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc && node ./dist/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "grammy": "^1.24.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.5"
+    },
+    "devDependencies": {
+        "@types/node": "^20.14.2",
+        "tsconfig-paths": "^4.2.0"
+    }
 }

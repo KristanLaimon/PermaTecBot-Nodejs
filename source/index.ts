@@ -1,8 +1,3 @@
-import bot from "./testbot";
-require("dotenv").config();
-
-bot.on("message:text", ctx => {
-  ctx.reply(ctx.message.text);
-});
-
+import PermaTecBot from "./Bot/permatecbot";
+const bot = new PermaTecBot(<string>process.env.BOT_TOKEN);
 bot.start();
