@@ -1,6 +1,6 @@
 import { Bot } from "grammy";
 import InitializeCommands from "./permatecbot_commands";
-require("dotenv").config();
+import ConfigFilters from "./permatecbot_filters";
 
 export default class TestBot extends Bot {
     screamingMode: boolean = false;
@@ -8,5 +8,6 @@ export default class TestBot extends Bot {
     constructor(tokenAPI: string) {
         super(tokenAPI);
         InitializeCommands(this);
+        ConfigFilters(this);
     }
 }

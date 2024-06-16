@@ -8,13 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\source\\testbot.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}\\source\\index.ts",
+            "outFiles": ["${workspaceFolder}/**/*.js"]
         }
     ]
 }

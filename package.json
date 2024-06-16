@@ -4,7 +4,7 @@
     "description": "A simple bot code in typescript",
     "main": "index.js",
     "scripts": {
-        "start": "tsc && node ./dist/index.js"
+        "start": "tsc --build --clean && tsc && node ./dist/index.js"
     },
     "keywords": [],
     "author": "",
