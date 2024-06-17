@@ -1,3 +1,2 @@
-status - Get Server status
-scream - Gritaré todo lo que me digas
-shhh - Lo mismo que lo anterior  pero en minúsculas
+status - Te doy los datos generales y el estado del servidor! PermaTec
+permadays - Brindo el día y cambio de dificultad actual del servidor

@@ -1,0 +1,3 @@
+interface PublicEnv {
+  StartingDay: string;
+}

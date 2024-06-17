@@ -1,12 +1,12 @@
 {
-    "files.exclude": {
-        ".vscode": true,
-        "dist": true,
-        "node_modules": true,
-        ".gitignore": true,
-        ".prettierrc": true,
-        "package-lock.json": true,
-        "package.json": true,
-        "tsconfig.json": true
-    }
+  "files.exclude": {
+    ".vscode": true,
+    "dist": true,
+    "node_modules": true,
+    ".gitignore": true,
+    ".prettierrc": true,
+    "package-lock.json": true,
+    "package.json": true,
+    "tsconfig.json": true
+  }
 }
