@@ -1,7 +1,6 @@
-import TestBot from "./permatecbot";
-import Utils from "../libs/utils";
+import PermaTecBot from "./permatecbot";
 
-export default function ConfigFilters(bot: TestBot): void {
+export default function ConfigFilters(bot: PermaTecBot): void {
   // bot.on("message:text", ctx => {
   //     let realMsg = bot.screamingMode
   //         ? ctx.message.text.toUpperCase()
