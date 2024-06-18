@@ -1,4 +1,4 @@
-import Apis from "../../apis/apis";
+import Apis from "../../model/apis/apis";
 import PermaTecBot from "../permatecbot";
 
 function Status_Command(bot: PermaTecBot) {

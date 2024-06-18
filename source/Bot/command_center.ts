@@ -1,14 +1,18 @@
 import PermaTecBot from "./permatecbot";
 import path from "path";
 import fs from "fs";
-import { DataUtils } from "../libs/utils";
+import { DataUtils } from "../model/libs/utils";
 import { CommandModule } from "../types/command_module";
+import { filter } from "./commands/messages/all_text";
 
 /** Array Containing all commands setup functions to add to "PermaTecBot" */
 const commandsToAdd: ((bot: PermaTecBot) => void)[] = [];
 
 /** Array containing all frontend inline buttons events for INLINE KEYBOARD API */
 const eventsToAdd: ((bot: PermaTecBot) => void)[] = [];
+
+/** Array containig all msg filters when user responses to this bot */
+const filtersToAdd: ((bot: PermaTecBot) => void)[] = [];
 
 /** Reads all command files RECURSIVELY on command folder name from from config.json */ //Local Method
 function loadCommandsAndEvents(dir: string) {
@@ -24,6 +28,9 @@ function loadCommandsAndEvents(dir: string) {
 
         if (typeof commandModule.events !== "undefined")
           eventsToAdd.push(commandModule.events);
+
+        if (typeof commandModule.filter !== "undefined")
+          filtersToAdd.push(commandModule.filter);
       } catch (err) {
         console.error(`Error loading module ${fullPath}:`, err);
       }
@@ -39,13 +46,9 @@ function setupAllFuncionalityBot(bot: PermaTecBot) {
   const dir = path.resolve(__dirname, DataUtils.getConfigData().CommandsPath);
   loadCommandsAndEvents(dir);
 
-  commandsToAdd.forEach(setCommandOn => {
-    setCommandOn(bot);
-  });
-
-  eventsToAdd.forEach(setEventOn => {
-    setEventOn(bot);
-  });
+  commandsToAdd.forEach(setCommandOn => setCommandOn(bot));
+  eventsToAdd.forEach(setEventOn => setEventOn(bot));
+  filtersToAdd.forEach(setFilterOn => setFilterOn(bot));
 }
 
 export { commandsToAdd, eventsToAdd, setupAllFuncionalityBot };

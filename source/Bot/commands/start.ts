@@ -1,5 +1,5 @@
 import { InlineKeyboard } from "grammy";
-import { DataUtils } from "../../libs/utils";
+import { DataUtils } from "../../model/libs/utils";
 import PermaTecBot from "../permatecbot";
 
 function Start_Command(bot: PermaTecBot) {

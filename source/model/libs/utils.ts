@@ -2,7 +2,7 @@ import fs from "fs";
 import moment, { Moment } from "moment";
 import cron from "node-cron";
 import sqlite, { Database } from "better-sqlite3";
-import PermaTecBot from "../bot/permatecbot";
+import PermaTecBot from "../../bot/permatecbot";
 
 namespace Utils {}
 

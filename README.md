@@ -13,4 +13,12 @@ To add a new command you must do the following:
    - events
      For your methods to be loaded on bot
 
+Summary:
+
+Command Modules should export a method with (bot: PermatecBot) => void signature:
+
+- If command, it should export 'command'
+- If events, it should export 'events'
+- If a filter funcionality (consult telegram API), it should export 'filter'
+
 For a better understanding, read and study "./source/commands/start.ts" file.

@@ -1,4 +1,4 @@
-import { TimeUtils } from "../../libs/utils";
+import { TimeUtils } from "../../model/libs/utils";
 import PermaTecBot from "../permatecbot";
 import { commandsToAdd } from "../command_center";
 
