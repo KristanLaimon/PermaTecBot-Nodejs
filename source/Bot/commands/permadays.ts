@@ -1,11 +1,11 @@
-import { TimeUtils } from "../../model/libs/utils";
 import PermaTecBot from "../permatecbot";
 import { commandsToAdd } from "../command_center";
+import Time from "../../controller/time";
 
 function PermaDays_Command(bot: PermaTecBot) {
   bot.command("permadays", ctx => {
-    let startingDay = TimeUtils.getStartingDate();
-    let daysPassed = TimeUtils.getDaysFromStartingDate();
+    let startingDay = Time.getStartingDate();
+    let daysPassed = Time.getDaysFromStartingDate();
 
     const strBuilder = [];
     strBuilder.push(`☀️ Días transcurridos: ${daysPassed} días`);

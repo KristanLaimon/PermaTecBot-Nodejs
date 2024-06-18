@@ -1,8 +1,8 @@
 require("dotenv").config();
 import PermaTecBot from "./bot/permatecbot";
-import { ConfigUtils } from "./model/libs/utils";
+import Time from "./controller/time";
 
 const bot = new PermaTecBot(<string>process.env.BOT_TOKEN);
-ConfigUtils.setupTimeConfig();
-ConfigUtils.setupDailyTask(bot);
+Time.setupLocaleTimeConfig();
+Time.setupDailyTask(bot);
 bot.start();

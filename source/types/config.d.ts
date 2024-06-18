@@ -1,4 +1,4 @@
-interface Config {
+interface ConfigJson {
   StartingDay: string;
   DatabasePath: string;
   SubscriptionsPath: string;

@@ -1,9 +1,8 @@
-import PermaTecBot from "./permatecbot";
-import path from "path";
 import fs from "fs";
-import { DataUtils } from "../model/libs/utils";
-import { CommandModule } from "../types/command_module";
-import { filter } from "./commands/messages/all_text";
+import path from "path";
+import PermaTecBot from "./permatecbot";
+import { CommandModule } from "../types/command_module"; //Entities layer
+import Config from "../controller/config"; //Controller layer
 
 /** Array Containing all commands setup functions to add to "PermaTecBot" */
 const commandsToAdd: ((bot: PermaTecBot) => void)[] = [];
@@ -43,7 +42,7 @@ function loadCommandsAndEvents(dir: string) {
  * @param bot PermaTec Bot to add all commands
  */
 function setupAllFuncionalityBot(bot: PermaTecBot) {
-  const dir = path.resolve(__dirname, DataUtils.getConfigData().CommandsPath);
+  const dir = path.resolve(__dirname, Config.Data.CommandsPath);
   loadCommandsAndEvents(dir);
 
   commandsToAdd.forEach(setCommandOn => setCommandOn(bot));

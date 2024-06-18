@@ -1,20 +1,20 @@
 import { InlineKeyboard } from "grammy";
-import { DataUtils } from "../../model/libs/utils";
 import PermaTecBot from "../permatecbot";
+import Config from "../../controller/config";
 
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", ctx => {
-    let startBotMsg = DataUtils.getConfigData()
-      .BotMessages.filter(msg => msg.Title === "start")
-      .at(0);
+    let foundStartMsg = Config.Data.BotMessages.find(
+      msg => msg.Title === "start"
+    );
 
-    if (startBotMsg) {
+    if (foundStartMsg) {
       const keyboard = new InlineKeyboard()
         .text("Subscribirme a noticias del server", "subscription-server")
-        .row();
-      // .url("Telegram", "telegram.org");
+        .row()
+        .url("GitHub", "https://github.com/KristanLaimon");
 
-      ctx.reply(startBotMsg.Message, {
+      ctx.reply(foundStartMsg.Message, {
         reply_markup: keyboard,
       });
     }
