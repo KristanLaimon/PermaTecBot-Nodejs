@@ -20,11 +20,15 @@ export default class DbSqlite {
     return this.Db.prepare(sqlQuery);
   }
 
+  static QueryWithParams(sqlQuery: string, params: any[]) {
+    return this.Db.prepare(sqlQuery).get(params);
+  }
+
   static QueryAll(sqlQuery: string): any {
     return this.Db.prepare(sqlQuery).all();
   }
 
-  static QueryWithParams(sqlQuery: string, params: any[]): number {
+  static ExecWithParams(sqlQuery: string, params: any[]): number {
     let result = this.Db.prepare(sqlQuery).run(params);
     return result.changes;
   }

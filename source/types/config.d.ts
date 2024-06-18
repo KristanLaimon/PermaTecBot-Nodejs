@@ -4,6 +4,7 @@ interface ConfigJson {
   SubscriptionsPath: string;
   BotMessages: BotMessage[];
   CommandsPath: string;
+  ImagesPath: string;
 }
 
 interface BotMessage {

@@ -25,7 +25,7 @@ function Start_Command(bot: PermaTecBot) {
 function Start_Events(bot: PermaTecBot) {
   bot.callbackQuery("subscription-server", ctx => {
     if (ctx.chat) {
-      if (Subscriptions.newSub(ctx.chat.id)) {
+      if (Subscriptions.addNew(ctx.chat.id)) {
         ctx.reply(`Se ha suscrito con el id ${ctx.chat.id} correctamente!`);
       } else {
         const inlineKeyB = new InlineKeyboard().text(
@@ -45,7 +45,7 @@ function Start_Events(bot: PermaTecBot) {
   bot.callbackQuery("desubscription-server", ctx => {
     if (ctx.chat) {
       if (Subscriptions.isSubscribed(ctx.chat.id)) {
-        Subscriptions.deleteSubscription(ctx.chat.id);
+        Subscriptions.delete(ctx.chat.id);
         ctx.reply("Se ha desuscrito. 🦊😢");
       } else {
         ctx.reply("Nunca estuvo suscrito..");

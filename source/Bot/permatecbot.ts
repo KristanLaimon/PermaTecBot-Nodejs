@@ -1,7 +1,7 @@
-import { Bot, Context } from "grammy";
+import { Bot } from "grammy";
 import { setupAllFuncionalityBot } from "./command_center";
 import Time from "../controller/time";
-import BotResponse from "./permatec_response";
+import BotResponse from "./permatecbot_response";
 
 export enum BotMode {
   Idle,

@@ -1,8 +1,8 @@
 import DbSqlite from "../model/dbsqlite";
 
 export default class Subscriptions {
-  static newSub(newIdChat: number): boolean {
-    const rowsAffected = DbSqlite.QueryWithParams(
+  static addNew(newIdChat: number): boolean {
+    const rowsAffected = DbSqlite.ExecWithParams(
       "INSERT INTO Subscription (ChatID, Subscribed) VALUES (?,?)",
       [newIdChat, true]
     );
@@ -11,8 +11,8 @@ export default class Subscriptions {
   }
 
   // idChat MUST BE IN JSON DATABASE!
-  static deleteSubscription(idChat: number) {
-    const rowsAffected = DbSqlite.QueryWithParams(
+  static delete(idChat: number) {
+    const rowsAffected = DbSqlite.ExecWithParams(
       `
       UPDATE Subscription
       SET Subscribed = true
@@ -32,7 +32,7 @@ export default class Subscriptions {
     return found;
   }
 
-  static getAllChatSubscribers() {
+  static getAllChatSubs() {
     // let jsonFilePath = this.getConfigData().SubscriptionsPath;
     // let fileContent = fs.readFileSync(jsonFilePath).toString();
     // return JSON.parse(fileContent) as number[];

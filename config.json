@@ -3,6 +3,7 @@
   "DatabasePath": "./db/permabotdb.db",
   "SubscriptionsPath": "./db/chatsubs.json",
   "CommandsPath": "commands",
+  "ImagesPath": "./imgs/days",
   "BotMessages": [
     {
       "Title": "start",

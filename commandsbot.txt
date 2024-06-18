@@ -1,3 +1,4 @@
 start - Bienvenida y configuraciones básicas
 status - Te doy los datos generales y el estado del servidor! PermaTec
+sendpic - Envía una foto aleatoria (testing)
 permadays - Brindo el día y cambio de dificultad actual del servidor
