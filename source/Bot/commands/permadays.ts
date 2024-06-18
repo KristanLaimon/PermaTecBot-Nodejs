@@ -1,5 +1,4 @@
 import PermaTecBot from "../permatecbot";
-import { commandsToAdd } from "../command_center";
 import Time from "../../controller/time";
 
 function PermaDays_Command(bot: PermaTecBot) {

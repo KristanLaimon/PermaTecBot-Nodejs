@@ -10,5 +10,3 @@ export default class DbJson {
     return this.readJsonFile("./config.json") as ConfigJson;
   }
 }
-
-//This should stay on sqlite database

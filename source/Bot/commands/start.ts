@@ -1,6 +1,7 @@
 import { InlineKeyboard } from "grammy";
 import PermaTecBot from "../permatecbot";
 import Config from "../../controller/config";
+import Subscriptions from "../../controller/subscriptions";
 
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", ctx => {
@@ -24,7 +25,7 @@ function Start_Command(bot: PermaTecBot) {
 function Start_Events(bot: PermaTecBot) {
   bot.callbackQuery("subscription-server", ctx => {
     if (ctx.chat) {
-      if (DataUtils.saveNewChatSubscriber(ctx.chat.id)) {
+      if (Subscriptions.newSub(ctx.chat.id)) {
         ctx.reply(`Se ha suscrito con el id ${ctx.chat.id} correctamente!`);
       } else {
         const inlineKeyB = new InlineKeyboard().text(
@@ -43,8 +44,8 @@ function Start_Events(bot: PermaTecBot) {
 
   bot.callbackQuery("desubscription-server", ctx => {
     if (ctx.chat) {
-      if (DataUtils.isSubscribed(ctx.chat.id)) {
-        DataUtils.deleteSubscription(ctx.chat.id);
+      if (Subscriptions.isSubscribed(ctx.chat.id)) {
+        Subscriptions.deleteSubscription(ctx.chat.id);
         ctx.reply("Se ha desuscrito. 🦊😢");
       } else {
         ctx.reply("Nunca estuvo suscrito..");

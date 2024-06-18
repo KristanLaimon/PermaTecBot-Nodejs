@@ -1,4 +1,3 @@
-import fs from "fs";
 import sqlite, { Database } from "better-sqlite3";
 import Config from "../controller/config";
 
@@ -23,6 +22,11 @@ export default class DbSqlite {
 
   static QueryAll(sqlQuery: string): any {
     return this.Db.prepare(sqlQuery).all();
+  }
+
+  static QueryWithParams(sqlQuery: string, params: any[]): number {
+    let result = this.Db.prepare(sqlQuery).run(params);
+    return result.changes;
   }
 }
 

@@ -50,4 +50,4 @@ function setupAllFuncionalityBot(bot: PermaTecBot) {
   filtersToAdd.forEach(setFilterOn => setFilterOn(bot));
 }
 
-export { commandsToAdd, eventsToAdd, setupAllFuncionalityBot };
+export { setupAllFuncionalityBot };

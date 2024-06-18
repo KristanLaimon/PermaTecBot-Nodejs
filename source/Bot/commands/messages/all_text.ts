@@ -1,19 +1,14 @@
-import PermaTecBot from "../../permatecbot";
+import PermaTecBot, { BotMode } from "../../permatecbot";
 
-export default function ConfigFilters(bot: PermaTecBot): void {
+export default function TextListener(bot: PermaTecBot): void {
   bot.on("message:text", ctx => {
-    ctx.reply("HOlis");
+    switch (bot.mode) {
+      case BotMode.ExpectingNextMsg:
+        bot.response.call(ctx);
+        bot.mode = BotMode.Idle;
+        break;
+    }
   });
 }
 
-export { ConfigFilters as filter };
-
-//Old testing command
-
-// bot.command("ruly", ctx => {
-//   bot.api
-//     .sendPhoto(ctx.chatId, new InputFile("./imgs/ruly.png"), {
-//       caption: "Ruly Momento",
-//     })
-//     .catch(error => ctx.reply(error.toString()));
-// });
+export { TextListener as filter };
