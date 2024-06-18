@@ -1,7 +1,6 @@
 import { InlineKeyboard } from "grammy";
 import { DataUtils } from "../../libs/utils";
 import PermaTecBot from "../permatecbot";
-import { commandsToAdd, eventsToAdd } from "../command_center";
 
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", ctx => {
@@ -55,5 +54,8 @@ function Start_Events(bot: PermaTecBot) {
   });
 }
 
-commandsToAdd.push(Start_Command);
-eventsToAdd.push(Start_Events);
+//'command' and 'event' is the module interface all Command Files should export to be loaded on bot
+export { Start_Command as command, Start_Events as events };
+
+//Alternatively you can just name those function as function command(...)... and function events(...)...
+//export {command, events}

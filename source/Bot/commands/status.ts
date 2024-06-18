@@ -1,6 +1,5 @@
 import Apis from "../../apis/apis";
 import PermaTecBot from "../permatecbot";
-import { commandsToAdd } from "../command_center";
 
 function Status_Command(bot: PermaTecBot) {
   bot.command("status", ctx => {
@@ -20,4 +19,4 @@ function Status_Command(bot: PermaTecBot) {
   });
 }
 
-commandsToAdd.push(Status_Command);
+export { Status_Command as command };

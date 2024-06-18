@@ -2,6 +2,7 @@ import PermaTecBot from "./permatecbot";
 import path from "path";
 import fs from "fs";
 import { DataUtils } from "../libs/utils";
+import { CommandModule } from "../types/command_module";
 
 /** Array Containing all commands setup functions to add to "PermaTecBot" */
 const commandsToAdd: ((bot: PermaTecBot) => void)[] = [];
@@ -9,13 +10,23 @@ const commandsToAdd: ((bot: PermaTecBot) => void)[] = [];
 /** Array containing all frontend inline buttons events for INLINE KEYBOARD API */
 const eventsToAdd: ((bot: PermaTecBot) => void)[] = [];
 
-/** Reads all command files NOT RECURSIVELY on "command" */
-function laodAllCommandFiles() {
-  const commandsDir = DataUtils.getConfigData().CommandsPath;
+/** Reads all command files RECURSIVELY on Command Folder from config.json */ //Local Method
+function loadCommandsAndEvents(dir: string) {
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      loadCommandsAndEvents(fullPath);
+    } else if (file.endsWith(".js")) {
+      try {
+        const commandModule: CommandModule = require(fullPath);
+        commandsToAdd.push(commandModule.command);
 
-  fs.readdirSync(commandsDir).forEach(file => {
-    if (file.endsWith(".ts")) {
-      require(path.join(commandsDir, file));
+        if (typeof commandModule.events !== "undefined") {
+          eventsToAdd.push(commandModule.events);
+        }
+      } catch (err) {
+        console.error(`Error loading module ${fullPath}:`, err);
+      }
     }
   });
 }
@@ -25,6 +36,9 @@ function laodAllCommandFiles() {
  * @param bot PermaTec Bot to add all commands
  */
 function setupAllFuncionalityBot(bot: PermaTecBot) {
+  const dir = path.resolve(__dirname, DataUtils.getConfigData().CommandsPath);
+  loadCommandsAndEvents(dir);
+
   commandsToAdd.forEach(setCommandOn => {
     setCommandOn(bot);
   });

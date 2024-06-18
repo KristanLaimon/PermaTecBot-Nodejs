@@ -16,4 +16,4 @@ function PermaDays_Command(bot: PermaTecBot) {
   });
 }
 
-commandsToAdd.push(PermaDays_Command);
+export { PermaDays_Command as command };
