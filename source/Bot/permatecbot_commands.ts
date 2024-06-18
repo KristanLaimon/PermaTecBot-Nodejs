@@ -1,10 +1,35 @@
-import { InputFile } from "grammy";
+import { InputFile, InlineKeyboard } from "grammy";
 import Apis from "../apis/apis";
 import PermaTecBot from "./permatecbot";
 import moment from "moment";
 import { DataUtils, TimeUtils } from "../libs/utils";
 
 export default function ConfigCommands(bot: PermaTecBot) {
+  bot.command("start", ctx => {
+    let startBotMsg = DataUtils.getConfigData()
+      .BotMessages.filter(msg => msg.Title === "start")
+      .at(0);
+
+    if (startBotMsg) {
+      const keyboard = new InlineKeyboard()
+        .text("Subscribirme a noticias del server", "subscription-server")
+        .row()
+        .url("Telegram", "telegram.org");
+
+      ctx.reply(startBotMsg.Message, {
+        reply_markup: keyboard,
+      });
+    }
+
+    // Send the keyboard:
+  });
+
+  bot.callbackQuery("subscription-server", ctx => {
+    ctx.reply("Has presionado el botón B");
+  });
+
+  //Other commands
+
   bot.command("status", ctx => {
     Apis.GetServerStatus(inf => {
       const strBuilder = [];

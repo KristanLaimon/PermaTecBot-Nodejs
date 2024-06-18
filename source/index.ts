@@ -4,5 +4,5 @@ import { ConfigUtils } from "./libs/utils";
 
 const bot = new PermaTecBot(<string>process.env.BOT_TOKEN);
 ConfigUtils.setupTimeConfig();
-ConfigUtils.setupDailyTask();
+ConfigUtils.setupDailyTask(bot);
 bot.start();

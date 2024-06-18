@@ -1,17 +1,24 @@
 import fs from "fs";
 import moment, { Moment } from "moment";
 import cron from "node-cron";
-import sqlite from "better-sqlite3";
+import sqlite, { Database } from "better-sqlite3";
 import PermaTecBot from "../bot/permatecbot";
+
+namespace Utils {}
 
 export class ConfigUtils {
   static setupTimeConfig(): void {
     moment.locale("es");
   }
 
+  /**
+   * Run a task everyday at 7AM
+   * @param bot
+   * @returns
+   */
   static setupDailyTask(bot: PermaTecBot): cron.ScheduledTask {
     return cron.schedule(
-      "0 0 7 * * *",
+      "0 0 7 * * *", //Strange Possibility: This can throw an error if I start this bot at 6:59:59 AM. Should never happen.
       () => {
         let daysPassed = TimeUtils.getDaysFromStartingDate();
         let publications = DataUtils.getAllPublicationDB();
@@ -38,17 +45,40 @@ export class StringUtils {
   }
 }
 
+/**
+ * Manages all JSON and SQLITE data stroring (Needs refactoring maybe)
+ */
 export class DataUtils {
+  private static _db: Database;
+
+  static get Db() {
+    if (this._db === undefined) {
+      this._db = new sqlite(DataUtils.getConfigData().DatabasePath);
+    }
+
+    return this._db;
+  }
+
+  static set Db(value: Database) {
+    this._db = value;
+  }
+
   static getConfigData(): Config {
-    let content = fs.readFileSync("./config.json");
+    let content = fs.readFileSync("./db/config.json");
     return JSON.parse(content.toString()) as Config;
   }
 
   static getAllPublicationDB(): Publication[] {
-    let db = sqlite(this.getConfigData().DatabasePath);
-    let pubs = db.prepare("SELECT * FROM Publication").all() as Publication[];
-    db.close();
+    let pubs = this.Db.prepare(
+      "SELECT * FROM Publication"
+    ).all() as Publication[];
+
+    this.Db.close();
     return pubs;
+  }
+
+  static saveNewChatSubscriber(...idChats: number[]) {
+    idChats.forEach(id => {});
   }
 }
 

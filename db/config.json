@@ -1,0 +1,10 @@
+{
+  "StartingDay": "2024-06-17",
+  "DatabasePath": "./db/permabotdb.db",
+  "BotMessages": [
+    {
+      "Title": "start",
+      "Message": "🦊 Hola soy el bot exclusivo para PermaTec Craft 🦊\nPodrás saber todo del servidor, y daré las buenas nuevas.\nAbajo encontrarás mis funciones"
+    }
+  ]
+}
