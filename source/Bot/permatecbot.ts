@@ -1,11 +1,10 @@
 import { Bot } from "grammy";
-import configCommands from "./permatecbot_commands";
-import configFilters from "./permatecbot_filters";
+import configFilters from "./commands/messages/msg_responses";
+import { setupAllFuncionalityBot } from "./command_center";
 
 export default class PermaTecBot extends Bot {
   constructor(tokenAPI: string) {
     super(tokenAPI);
-    configCommands(this);
-    configFilters(this);
+    setupAllFuncionalityBot(this);
   }
 }

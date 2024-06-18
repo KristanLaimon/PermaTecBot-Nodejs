@@ -3,6 +3,7 @@ interface Config {
   DatabasePath: string;
   SubscriptionsPath: string;
   BotMessages: BotMessage[];
+  CommandsPath: string;
 }
 
 interface BotMessage {

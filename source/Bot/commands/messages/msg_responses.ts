@@ -1,4 +1,4 @@
-import PermaTecBot from "./permatecbot";
+import PermaTecBot from "../../permatecbot";
 
 export default function ConfigFilters(bot: PermaTecBot): void {
   // bot.on("message:text", ctx => {
@@ -8,3 +8,13 @@ export default function ConfigFilters(bot: PermaTecBot): void {
   //     ctx.reply(realMsg);
   // });
 }
+
+//Old testing command
+
+// bot.command("ruly", ctx => {
+//   bot.api
+//     .sendPhoto(ctx.chatId, new InputFile("./imgs/ruly.png"), {
+//       caption: "Ruly Momento",
+//     })
+//     .catch(error => ctx.reply(error.toString()));
+// });
