@@ -1,2 +1,3 @@
+start - Bienvenida y configuraciones básicas
 status - Te doy los datos generales y el estado del servidor! PermaTec
 permadays - Brindo el día y cambio de dificultad actual del servidor

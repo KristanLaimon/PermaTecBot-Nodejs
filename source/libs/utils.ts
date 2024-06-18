@@ -45,15 +45,13 @@ export class StringUtils {
   }
 }
 
-/**
- * Manages all JSON and SQLITE data stroring (Needs refactoring maybe)
- */
+/** Manages all JSON and SQLITE data stroring (Needs refactoring maybe) */
 export class DataUtils {
   private static _db: Database;
 
   static get Db() {
     if (this._db === undefined) {
-      this._db = new sqlite(DataUtils.getConfigData().DatabasePath);
+      this._db = new sqlite(this.getConfigData().DatabasePath);
     }
 
     return this._db;
@@ -64,7 +62,7 @@ export class DataUtils {
   }
 
   static getConfigData(): Config {
-    let content = fs.readFileSync("./db/config.json");
+    let content = fs.readFileSync("./config.json");
     return JSON.parse(content.toString()) as Config;
   }
 
@@ -78,7 +76,27 @@ export class DataUtils {
   }
 
   static saveNewChatSubscriber(...idChats: number[]) {
-    idChats.forEach(id => {});
+    let jsonFilePath = this.getConfigData().SubscriptionsPath;
+    let fileContent = fs.readFileSync(jsonFilePath).toString();
+    let allIds: number[];
+
+    if (fileContent === "") {
+      allIds = [];
+    } else {
+      allIds = JSON.parse(fileContent) as number[];
+    }
+
+    idChats.forEach(id => {
+      allIds.push(id);
+    });
+
+    fs.writeFileSync(jsonFilePath, JSON.stringify(allIds));
+  }
+
+  static getAllChatSubscribers() {
+    let jsonFilePath = this.getConfigData().SubscriptionsPath;
+    let fileContent = fs.readFileSync(jsonFilePath).toString();
+    return JSON.parse(fileContent) as number[];
   }
 }
 

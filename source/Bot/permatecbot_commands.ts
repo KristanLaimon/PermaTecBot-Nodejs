@@ -20,12 +20,15 @@ export default function ConfigCommands(bot: PermaTecBot) {
         reply_markup: keyboard,
       });
     }
-
-    // Send the keyboard:
   });
 
   bot.callbackQuery("subscription-server", ctx => {
-    ctx.reply("Has presionado el botón B");
+    if (ctx.chat) {
+      DataUtils.saveNewChatSubscriber(ctx.chat.id);
+      ctx.reply(`Se ha suscrito con el id ${ctx.chat.id} correctamente!`);
+      ctx.answerCallbackQuery(); // remove loading animation
+    }
+    //I should log when chat is undefined....
   });
 
   //Other commands
