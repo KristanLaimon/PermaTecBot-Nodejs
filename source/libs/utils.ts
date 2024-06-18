@@ -66,16 +66,7 @@ export class DataUtils {
     return JSON.parse(content.toString()) as Config;
   }
 
-  static getAllPublicationDB(): Publication[] {
-    let pubs = this.Db.prepare(
-      "SELECT * FROM Publication"
-    ).all() as Publication[];
-
-    this.Db.close();
-    return pubs;
-  }
-
-  static saveNewChatSubscriber(...idChats: number[]) {
+  static getChatSubsData(): number[] {
     let jsonFilePath = this.getConfigData().SubscriptionsPath;
     let fileContent = fs.readFileSync(jsonFilePath).toString();
     let allIds: number[];
@@ -85,12 +76,61 @@ export class DataUtils {
     } else {
       allIds = JSON.parse(fileContent) as number[];
     }
+    return allIds;
+  }
 
-    idChats.forEach(id => {
-      allIds.push(id);
-    });
+  static saveChatSubData(idChatsReady: number[]) {
+    let idChatsJson = JSON.stringify(idChatsReady);
+    fs.writeFileSync(this.getConfigData().SubscriptionsPath, idChatsJson);
+  }
 
-    fs.writeFileSync(jsonFilePath, JSON.stringify(allIds));
+  static getAllPublicationDB(): Publication[] {
+    let pubs = this.Db.prepare(
+      "SELECT * FROM Publication"
+    ).all() as Publication[];
+
+    this.Db.close();
+    return pubs;
+  }
+
+  static saveNewChatSubscriber(newIdChat: number): boolean {
+    let allIds = this.getChatSubsData();
+
+    if (allIds.find(idStored => idStored === newIdChat)) {
+      return false;
+    } else {
+      allIds.push(newIdChat);
+    }
+
+    this.saveChatSubData(allIds);
+    return true;
+  }
+
+  //idChat MUST BE IN JSON DATABASE!
+  static deleteSubscription(idChat: number) {
+    let allIds = this.getChatSubsData();
+
+    for (let i = 0; i < allIds.length; i++) {
+      if (allIds[i] === idChat) {
+        allIds = allIds.slice(i, i);
+        this.saveChatSubData(allIds);
+        return;
+      }
+    }
+
+    throw Error("Subscription isn't on JSON database");
+  }
+
+  //Probably use a hash method to improve performance. Whattt, to add a subscriber already does this thing!
+  static isSubscribed(idChat: number): boolean {
+    let allIds = this.getChatSubsData();
+    for (let i = 0; i < allIds.length; i++) {
+      if (allIds[i] === idChat) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   static getAllChatSubscribers() {

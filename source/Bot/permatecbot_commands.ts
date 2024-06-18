@@ -1,10 +1,10 @@
-import { InputFile, InlineKeyboard } from "grammy";
+import { InlineKeyboard } from "grammy";
 import Apis from "../apis/apis";
 import PermaTecBot from "./permatecbot";
-import moment from "moment";
 import { DataUtils, TimeUtils } from "../libs/utils";
 
 export default function ConfigCommands(bot: PermaTecBot) {
+  //Other commands
   bot.command("start", ctx => {
     let startBotMsg = DataUtils.getConfigData()
       .BotMessages.filter(msg => msg.Title === "start")
@@ -13,8 +13,8 @@ export default function ConfigCommands(bot: PermaTecBot) {
     if (startBotMsg) {
       const keyboard = new InlineKeyboard()
         .text("Subscribirme a noticias del server", "subscription-server")
-        .row()
-        .url("Telegram", "telegram.org");
+        .row();
+      // .url("Telegram", "telegram.org");
 
       ctx.reply(startBotMsg.Message, {
         reply_markup: keyboard,
@@ -24,14 +24,34 @@ export default function ConfigCommands(bot: PermaTecBot) {
 
   bot.callbackQuery("subscription-server", ctx => {
     if (ctx.chat) {
-      DataUtils.saveNewChatSubscriber(ctx.chat.id);
-      ctx.reply(`Se ha suscrito con el id ${ctx.chat.id} correctamente!`);
+      if (DataUtils.saveNewChatSubscriber(ctx.chat.id)) {
+        ctx.reply(`Se ha suscrito con el id ${ctx.chat.id} correctamente!`);
+      } else {
+        const inlineKeyB = new InlineKeyboard().text(
+          "Desuscribirse?",
+          "desubscription-server"
+        );
+
+        ctx.reply("Ya se ha suscrito 🦊", {
+          reply_markup: inlineKeyB,
+        });
+      }
       ctx.answerCallbackQuery(); // remove loading animation
     }
     //I should log when chat is undefined....
   });
 
-  //Other commands
+  bot.callbackQuery("desubscription-server", ctx => {
+    if (ctx.chat) {
+      if (DataUtils.isSubscribed(ctx.chat.id)) {
+        DataUtils.deleteSubscription(ctx.chat.id);
+        ctx.reply("Se ha desuscrito. 🦊😢");
+      } else {
+        ctx.reply("Nunca estuvo suscrito..");
+      }
+      ctx.answerCallbackQuery();
+    }
+  });
 
   bot.command("status", ctx => {
     Apis.GetServerStatus(inf => {
