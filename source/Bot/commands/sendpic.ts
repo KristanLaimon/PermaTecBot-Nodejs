@@ -1,45 +1,30 @@
+//Dependencies
 import { Context, InputFile } from "grammy";
-import PermaTecBot, { BotMode } from "../permatecbot";
 import path from "path";
-import Config from "../../controller/config";
+
+//View Layer
+import PermaTecBot, { BotMode } from "../permatecbot";
+
+//Controller Layer
 import DbCache from "../../controller/db_cache";
+import Query from "../../controller/query";
+import Time from "../../controller/time";
+import Subscriptions from "../../controller/subscriptions";
 
 function Publication_Command(bot: PermaTecBot) {
   bot.command("send", ctx => {
-    ctx.reply(
-      "Escribe el número de día en el que desees consultar. Por defecto 10"
-    );
+    ctx.reply("Escribe el número de día en el que desees consultar.");
     bot.mode = BotMode.ExpectingNextMsg;
-    bot.response.setReponse(ResponseGetDay);
-  });
-}
-
-function ResponseGetDay(ctx: Context) {
-  const dia: number = parseInt(ctx.message?.text ?? "10");
-  const fullPub = DbCache.getFullPublicationToday(dia);
-
-  if (!fullPub.found) {
-    ctx.reply("Hoy no hay nada que publicar");
-    return;
-  }
-
-  let inputImgs = fullPub.imgs.map(img => {
-    return new InputFile(path.join(Config.Data.ImagesPath, img.Name));
-  });
-
-  let coverImgInput = inputImgs[0];
-
-  //Max telegram length for caption is 70
-  if (fullPub.message && fullPub.message.length < 70) {
-    ctx.replyWithPhoto(coverImgInput, { caption: fullPub.message });
-  } else {
-    ctx.replyWithPhoto(coverImgInput).then(() => {
-      ctx.reply(fullPub.message ?? "");
+    bot.response.setReponse(ctx => {
+      let day = Time.getDaysFromStartingDate();
+      if (bot.isPublicationDay(day)) {
+        if (Subscriptions.isSubscribed(ctx.from?.id ?? 0)) {
+          bot.sendPublicationFromDay(day);
+        } else {
+          ctx.reply("Tienes que estar suscrito para mandarte esto");
+        }
+      }
     });
-  }
-
-  inputImgs.slice(1).forEach(inputImg => {
-    ctx.replyWithPhoto(inputImg);
   });
 }
 

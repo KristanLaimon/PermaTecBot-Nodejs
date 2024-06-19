@@ -1,3 +1,4 @@
+//Dependencies
 import axios from "axios";
 
 const statusEndPoint = "https://api.mcsrvstat.us/3/"; //Put ip after .../3/ <-//

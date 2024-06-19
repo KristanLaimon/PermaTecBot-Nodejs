@@ -1,5 +1,5 @@
 {
-  "StartingDay": "2024-06-08",
+  "StartingDay": "2024-05-10",
   "DatabasePath": "./db/permabotdb.db",
   "SubscriptionsPath": "./db/chatsubs.json",
   "CommandsPath": "commands",

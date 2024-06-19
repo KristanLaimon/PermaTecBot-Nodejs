@@ -1,4 +1,4 @@
-import { all } from "axios";
+//Model Layer
 import DbSqlite from "../model/dbsqlite";
 
 export default class Subscriptions {

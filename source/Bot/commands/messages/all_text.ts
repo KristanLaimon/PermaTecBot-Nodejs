@@ -1,3 +1,4 @@
+//View Layer only
 import PermaTecBot, { BotMode } from "../../permatecbot";
 
 export default function TextListener(bot: PermaTecBot): void {

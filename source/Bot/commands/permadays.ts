@@ -1,4 +1,7 @@
+//View Layer
 import PermaTecBot from "../permatecbot";
+
+//Controller Layer
 import Time from "../../controller/time";
 
 function PermaDays_Command(bot: PermaTecBot) {

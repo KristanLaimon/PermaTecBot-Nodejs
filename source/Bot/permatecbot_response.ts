@@ -1,3 +1,4 @@
+//Dependencies
 import { Context } from "grammy";
 
 type BotEvent = (ctx: Context) => void;

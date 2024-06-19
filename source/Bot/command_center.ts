@@ -1,8 +1,13 @@
+//Dependencies
 import fs from "fs";
 import path from "path";
+
+//Entities layer
 import PermaTecBot from "./permatecbot";
-import { CommandModule } from "../types/command_module"; //Entities layer
-import Config from "../controller/config"; //Controller layer
+import { CommandModule } from "../types/command_module";
+
+//Controller layer
+import DbCache from "../controller/db_cache";
 
 /** Array Containing all commands setup functions to add to "PermaTecBot" */
 const commandsToAdd: ((bot: PermaTecBot) => void)[] = [];
@@ -42,7 +47,7 @@ function loadCommandsAndEvents(dir: string) {
  * @param bot PermaTec Bot to add all commands
  */
 function setupAllFuncionalityBot(bot: PermaTecBot) {
-  const dir = path.resolve(__dirname, Config.Data.CommandsPath);
+  const dir = path.resolve(__dirname, DbCache.Config.CommandsPath);
   loadCommandsAndEvents(dir);
 
   commandsToAdd.forEach(setCommandOn => setCommandOn(bot));

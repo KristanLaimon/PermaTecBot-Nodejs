@@ -1,5 +1,8 @@
-import Apis from "../../controller/apis";
+//View Layer
 import PermaTecBot from "../permatecbot";
+
+//Controller Layer
+import Apis from "../../controller/apis";
 
 function Status_Command(bot: PermaTecBot) {
   bot.command("status", ctx => {

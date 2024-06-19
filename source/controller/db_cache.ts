@@ -1,8 +1,11 @@
+//Model Layer
+import DbJson from "../model/dbjson";
 import DbSqlite from "../model/dbsqlite";
 
 export default class DbCache {
   private static _dbImages: Image[];
   private static _dbPublications: Publication[];
+  private static _jsonConfig: ConfigJson;
 
   static get DbImages(): Image[] {
     if (!this._dbImages) {
@@ -20,38 +23,17 @@ export default class DbCache {
     return this._dbPublications;
   }
 
+  static get Config(): ConfigJson {
+    if (!this._jsonConfig) {
+      this._jsonConfig = DbJson.readConfigJson();
+    }
+    return this._jsonConfig;
+  }
+
   static refreshCache() {
     this._dbImages = getImgFromDb();
     this._dbPublications = getPubsFromDb();
-  }
-
-  /**
-   * @param todayDay Integer Number representing number of days from server start (today day publication)
-   * @returns FullPublication Object with all data to publish today (if today is the day!)
-   */
-  static getFullPublicationToday(todayDay: number): FullPublication {
-    let todaysPubFound = DbSqlite.QueryWithParams(
-      "SELECT * FROM Publication WHERE Day = ? LIMIT 1",
-      [todayDay]
-    ) as Publication;
-
-    if (!todaysPubFound) return { found: false, day: 0, message: "", imgs: [] };
-
-    let todaysAllImgs = DbSqlite.QueryWithParamsAll(
-      "SELECT * FROM Image WHERE PublicationDay = ? ORDER BY Name;",
-      [todayDay]
-    ) as Image | Image[];
-
-    if (!Array.isArray(todaysAllImgs)) {
-      todaysAllImgs = [todaysAllImgs];
-    }
-
-    return {
-      found: true,
-      day: todayDay,
-      message: todaysPubFound.Message,
-      imgs: todaysAllImgs,
-    };
+    this._jsonConfig = DbJson.readConfigJson();
   }
 }
 

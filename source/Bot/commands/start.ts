@@ -1,7 +1,12 @@
+//Dependencies
 import { Context, InlineKeyboard } from "grammy";
+
+//View Layer
 import PermaTecBot from "../permatecbot";
-import Config from "../../controller/config";
+
+//Controller Layer
 import Subscriptions from "../../controller/subscriptions";
+import DbCache from "../../controller/db_cache";
 
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", Start);
@@ -13,7 +18,7 @@ function Start_Events(bot: PermaTecBot) {
 }
 
 function Start(ctx: Context) {
-  let foundStartMsg = Config.Data.BotMessages.find(
+  let foundStartMsg = DbCache.Config.BotMessages.find(
     msg => msg.Title === "start"
   );
 
