@@ -9,6 +9,8 @@ import Subscriptions from "../../controller/subscriptions";
 import DbCache from "../../controller/db_cache";
 import { UserClickedSuscribedButton } from "../../controller/waiting";
 
+const timeSpan = DbCache.Config.WatingReponseTimeSpan / 1000;
+
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", Start);
 }
@@ -40,9 +42,12 @@ function Subscribe(ctx: Context) {
   const chatId = ctx.chat.id;
 
   if (UserClickedSuscribedButton(chatId, ctx)) {
+    ctx.reply(
+      `⏳ Por favor, espera ${timeSpan} segundos antes de intentar suscribirte de nuevo. ⏳`
+    );
     ctx.answerCallbackQuery();
-    return
-  };
+    return;
+  }
 
   if (!Subscriptions.exists(chatId)) {
     Subscriptions.insertNewSubscriber(chatId);
@@ -63,11 +68,13 @@ function Subscribe(ctx: Context) {
 
 function Unsubscribe(ctx: Context) {
   if (ctx.chat) {
-    
     if (UserClickedSuscribedButton(ctx.chat.id, ctx)) {
+      ctx.reply(
+        `⏳ Por favor, espera ${timeSpan} segundos antes de intentar desuscribirte de nuevo. ⏳`
+      );
       ctx.answerCallbackQuery();
-      return
-    };
+      return;
+    }
 
     if (Subscriptions.isSubscribed(ctx.chat.id)) {
       Subscriptions.unsubscribe(ctx.chat.id);

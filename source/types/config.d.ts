@@ -5,6 +5,7 @@ interface ConfigJson {
   BotMessages: BotMessage[];
   CommandsPath: string;
   ImagesPath: string;
+  WatingReponseTimeSpan: number;
 }
 
 interface BotMessage {

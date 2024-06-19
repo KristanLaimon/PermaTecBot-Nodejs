@@ -4,6 +4,7 @@
   "SubscriptionsPath": "./db/chatsubs.json",
   "CommandsPath": "commands",
   "ImagesPath": "./imgs/days",
+  "WatingReponseTimeSpan": 5000,
   "BotMessages": [
     {
       "Title": "start",
