@@ -1,13 +1,13 @@
 {
   "files.exclude": {
-    ".vscode": true,
-    "dist": true,
-    "node_modules": true,
-    ".gitignore": true,
-    ".prettierrc": true,
-    "package-lock.json": true,
-    "package.json": true,
-    "tsconfig.json": true
+    ".vscode": false,
+    "dist": false,
+    "node_modules": false,
+    ".gitignore": false,
+    ".prettierrc": false,
+    "package-lock.json": false,
+    "package.json": false,
+    "tsconfig.json": false
   },
   "sqltools.useNodeRuntime": true,
   "sqltools.connections": [
