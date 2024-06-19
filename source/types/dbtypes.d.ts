@@ -12,7 +12,7 @@ interface Publication {
 
 type FullPublication = {
   found: boolean;
-  day?: number;
-  message?: string;
-  imgs?: Image[];
+  day: number;
+  message: string;
+  imgs: Image[];
 };

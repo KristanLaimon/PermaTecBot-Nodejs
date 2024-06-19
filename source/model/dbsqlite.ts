@@ -20,12 +20,16 @@ export default class DbSqlite {
     return this.Db.prepare(sqlQuery);
   }
 
+  static QueryAll(sqlQuery: string): any {
+    return this.Db.prepare(sqlQuery).all();
+  }
+
   static QueryWithParams(sqlQuery: string, params: any[]) {
     return this.Db.prepare(sqlQuery).get(params);
   }
 
-  static QueryAll(sqlQuery: string): any {
-    return this.Db.prepare(sqlQuery).all();
+  static QueryWithParamsAll(sqlQuery: string, params: any[]) {
+    return this.Db.prepare(sqlQuery).all(params);
   }
 
   static ExecWithParams(sqlQuery: string, params: any[]): number {

@@ -1,7 +1,11 @@
-import { Bot } from "grammy";
+import { Bot, InputFile } from "grammy";
 import { setupAllFuncionalityBot } from "./command_center";
 import Time from "../controller/time";
 import BotResponse from "./permatecbot_response";
+import Subscriptions from "../controller/subscriptions";
+import DbCache from "../controller/db_cache";
+import path from "path";
+import Config from "../controller/config";
 
 export enum BotMode {
   Idle,
@@ -15,6 +19,10 @@ export default class PermaTecBot extends Bot {
   constructor(tokenAPI: string) {
     super(tokenAPI);
     setupAllFuncionalityBot(this);
+
     Time.setupLocaleTimeConfig();
+    Time.setupTestTask();
+
+    // Time.setupDailyTask(this.dailyBotTask, 7).start();
   }
 }

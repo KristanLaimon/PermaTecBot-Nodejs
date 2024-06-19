@@ -35,12 +35,16 @@ export default class DbCache {
       [todayDay]
     ) as Publication;
 
-    if (!todaysPubFound) return { found: false };
+    if (!todaysPubFound) return { found: false, day: 0, message: "", imgs: [] };
 
-    let todaysAllImgs = DbSqlite.QueryWithParams(
+    let todaysAllImgs = DbSqlite.QueryWithParamsAll(
       "SELECT * FROM Image WHERE PublicationDay = ? ORDER BY Name;",
       [todayDay]
-    ) as Image[];
+    ) as Image | Image[];
+
+    if (!Array.isArray(todaysAllImgs)) {
+      todaysAllImgs = [todaysAllImgs];
+    }
 
     return {
       found: true,

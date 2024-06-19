@@ -1,9 +1,10 @@
 import Config from "./config";
 import moment from "moment";
-import cron from "node-cron";
+import schedule from "node-schedule";
+import PermaTecBot from "../bot/permatecbot";
 
 export default class Time {
-  static DailyTask: cron.ScheduledTask;
+  // static DailyTask: any;
 
   /**
    * Run a task everyday at specific hour. This Time class will keep the task on 'DailyTask' property
@@ -12,17 +13,17 @@ export default class Time {
    * Format: 24Hrs
    * @returns
    */
-  static setupDailyTask(
-    dailyCallBack: () => void,
-    Hour: number = 7
-  ): cron.ScheduledTask {
-    return cron.schedule(
-      `0 0 ${Hour} * * *`, //Strange Possibility: This can throw an error if I start this bot at 6:59:59 AM. Should never happen.
-      dailyCallBack,
-      {
-        timezone: "America/Tijuana",
-      }
-    );
+  static setupDailyTask(dailyCallBack: () => void, hour: number) {
+    // return schedule.scheduleJob(
+    //   { second: 0, tz: "America/Tijuana" },
+    //   dailyCallBack
+    // );
+  }
+
+  static setupTestTask() {
+    // setInterval(() => {
+    //   dailyCallBack(bot);
+    // }, 1000);
   }
 
   static getDaysFromStartingDate(): number {
@@ -39,3 +40,38 @@ export default class Time {
     return moment(Config.Data.StartingDay);
   }
 }
+
+// function dailyBotTask(bot: PermaTecBot) {
+//   let daysPassed = Time.getDaysFromStartingDate();
+
+//   const todayIsTheDay = DbCache.DbPubs.find(pub => pub.Day === daysPassed);
+
+//   if (todayIsTheDay) {
+//     const allSubs = Subscriptions.getAllSubs();
+//     const fullPub = DbCache.getFullPublicationToday(daysPassed);
+
+//     let inputImgs = fullPub.imgs.map(img => {
+//       return new InputFile(path.join(Config.Data.ImagesPath, img.Name));
+//     });
+
+//     let coverImgInput = inputImgs[0];
+//     let restOfThem = inputImgs.slice(1);
+
+//     allSubs.forEach(sub => {
+//       //Max telegram length for caption is 70
+//       if (fullPub.message && fullPub.message.length < 70) {
+//         bot.api.sendPhoto(sub.ChatID, coverImgInput, {
+//           caption: fullPub.message,
+//         });
+//       } else {
+//         bot.api.sendPhoto(sub.ChatID, coverImgInput).then(() => {
+//           bot.api.sendMessage(sub.ChatID, fullPub.message ?? "");
+//         });
+//       }
+
+//       restOfThem.forEach(inputImg => {
+//         bot.api.sendPhoto(sub.ChatID, inputImg);
+//       });
+//     });
+//   }
+// }
