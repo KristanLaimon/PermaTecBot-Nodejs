@@ -7,6 +7,7 @@ import PermaTecBot from "../permatecbot";
 //Controller Layer
 import Subscriptions from "../../controller/subscriptions";
 import DbCache from "../../controller/db_cache";
+import { UserClickedSuscribedButton } from "../../controller/waiting";
 
 function Start_Command(bot: PermaTecBot) {
   bot.command("start", Start);
@@ -38,6 +39,11 @@ function Subscribe(ctx: Context) {
   if (!ctx.chat) return;
   const chatId = ctx.chat.id;
 
+  if (UserClickedSuscribedButton(chatId, ctx)) {
+    ctx.answerCallbackQuery();
+    return
+  };
+
   if (!Subscriptions.exists(chatId)) {
     Subscriptions.insertNewSubscriber(chatId);
     ctx.reply(`🟩 Se ha suscrito correctamente! 🟩`);
@@ -57,6 +63,12 @@ function Subscribe(ctx: Context) {
 
 function Unsubscribe(ctx: Context) {
   if (ctx.chat) {
+    
+    if (UserClickedSuscribedButton(ctx.chat.id, ctx)) {
+      ctx.answerCallbackQuery();
+      return
+    };
+
     if (Subscriptions.isSubscribed(ctx.chat.id)) {
       Subscriptions.unsubscribe(ctx.chat.id);
       ctx.reply("🟥 Se ha desuscrito. 🦊😢 🟥");
