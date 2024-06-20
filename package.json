@@ -1,20 +1,25 @@
 {
-  "name": "testing_world_bot-ts",
+  "name": "permabot",
   "version": "1.0.0",
   "description": "A simple bot code in typescript",
-  "main": "index.js",
+  "main": "js/index.js",
+  "bin": "js/index.js",
   "scripts": {
-    "start": "tsc --build --clean && tsc && node ./dist/index.js"
+    "dev": "tsnd --respawn src/index.ts",
+    "build": "npm run build-tsc && npm run build-exes && npm run build-copy",
+    "build-tsc": "tsc --build --clean && tsc --build",
+    "build-exes": "pkg . -t latest-win-x64,latest-linux-x64 --out-path bin/",
+    "build-copy": "cpy .env config.json imgs/ permabotdb.db bin"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.2",
     "better-sqlite3": "^11.0.0",
     "dotenv": "^16.4.5",
     "grammy": "^1.24.1",
     "moment": "^2.30.1",
+    "node-fetch": "^2.7.0",
     "node-schedule": "^2.1.1"
   },
   "devDependencies": {
@@ -22,21 +27,15 @@
     "@types/node": "^20.14.2",
     "@types/node-cron": "^3.0.11",
     "@types/node-schedule": "^2.1.7",
+    "@vercel/ncc": "^0.38.1",
+    "cpy-cli": "^5.0.0",
     "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
   },
-  "bin": "dist/index.js",
   "pkg": {
-    "scripts": "dist/**/*.js",
-    "assets": [
-      "db/**/**",
-      "imgs/**/*"
-    ],
-    "targets": [
-      "node10-linux-x64",
-      "latest-windows-x64"
-    ],
-    "outputPath": "release"
+    "scripts": [
+      "js/**/*.js"
+    ]
   }
 }

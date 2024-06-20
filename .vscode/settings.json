@@ -1,21 +1,11 @@
 {
-  "files.exclude": {
-    ".vscode": false,
-    "dist": false,
-    "node_modules": false,
-    ".gitignore": false,
-    ".prettierrc": false,
-    "package-lock.json": false,
-    "package.json": false,
-    "tsconfig.json": false
-  },
-  "sqltools.useNodeRuntime": true,
   "sqltools.connections": [
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "database": "${workspaceFolder:PermaTecBot}/db/permabotdb.db",
-      "name": "PermaDB"
+      "database": "${workspaceFolder:PermaTecBot}/permabotdb.db",
+      "name": "PermaBot"
     }
-  ]
+  ],
+  "files.exclude": {}
 }

@@ -1,10 +1,9 @@
 {
   "StartingDay": "2024-05-10",
-  "DatabasePath": "./db/permabotdb.db",
-  "SubscriptionsPath": "./db/chatsubs.json",
+  "DatabasePath": "./permabotdb.db",
   "CommandsPath": "commands",
-  "ImagesPath": "./imgs/days",
-  "WatingReponseTimeSpan": 5000,
+  "ImagesPath": "./imgs/",
+  "WatingReponseTimeSpan": 3000,
   "BotMessages": [
     {
       "Title": "start",

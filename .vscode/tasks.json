@@ -1,13 +1,13 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Watch Typescript Compiler",
-            "type": "shell",
-            "command": "tsc -w",
-            "runOptions": {
-                "runOn": "folderOpen"
-            }
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Watch Typescript Compiler",
+      "type": "shell",
+      "command": "tsc -w",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
 }
