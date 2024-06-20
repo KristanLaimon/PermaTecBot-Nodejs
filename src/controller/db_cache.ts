@@ -1,13 +1,15 @@
+/// <reference path="../types/config.d.ts" />
+
 //Model Layer
 import DbJson from "../model/dbjson";
 import DbSqlite from "../model/dbsqlite";
 
 export default class DbCache {
-  private static _dbImages: Image[];
+  private static _dbImages: PubImage[];
   private static _dbPublications: Publication[];
   private static _jsonConfig: ConfigJson;
 
-  static get DbImages(): Image[] {
+  static get DbImages(): PubImage[] {
     if (!this._dbImages) {
       this._dbImages = getImgFromDb();
     }
@@ -38,8 +40,8 @@ export default class DbCache {
 }
 
 //Private functions of this module
-function getImgFromDb(): Image[] {
-  return DbSqlite.QueryAll("SELECT * FROM Image;") as Image[];
+function getImgFromDb(): PubImage[] {
+  return DbSqlite.QueryAll("SELECT * FROM Image;") as PubImage[];
 }
 
 function getPubsFromDb(): Publication[] {

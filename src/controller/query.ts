@@ -1,3 +1,5 @@
+/// <reference path="../types/dbtypes.d.ts" />
+
 //Model Layer
 import DbSqlite from "../model/dbsqlite";
 
@@ -17,7 +19,7 @@ export default class Query {
     let todaysAllImgs = DbSqlite.QueryWithParamsAll(
       "SELECT * FROM Image WHERE PublicationDay = ? ORDER BY Name;",
       [todayDay]
-    ) as Image | Image[];
+    ) as PubImage | PubImage[];
 
     if (!Array.isArray(todaysAllImgs)) {
       todaysAllImgs = [todaysAllImgs];

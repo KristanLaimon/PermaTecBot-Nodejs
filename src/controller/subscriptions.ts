@@ -1,3 +1,5 @@
+/// <reference path="../types/subscription.d.ts" />
+
 //Model Layer
 import DbSqlite from "../model/dbsqlite";
 

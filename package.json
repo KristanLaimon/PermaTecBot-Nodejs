@@ -8,6 +8,7 @@
     "dev": "tsnd --respawn src/index.ts",
     "start": "ts-node src/index.ts",
     "build": "npm run build-tsc && npm run build-exes && npm run build-copy",
+    "buildsoft": "tsc --build --clean && tsc --build",
     "build-tsc": "tsc --build --clean && tsc --build",
     "build-exes": "pkg . -t latest-linux-x64,latest-win-x64 --out-path bin/",
     "build-copy": "cpy .env config.json imgs/ permabotdb.db bin"

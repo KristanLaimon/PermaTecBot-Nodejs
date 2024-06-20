@@ -1,3 +1,5 @@
+/// <reference path="../types/dbtypes.d.ts" />
+
 //Dependencies
 import path from "path";
 import { Bot, InputFile } from "grammy";
@@ -48,7 +50,7 @@ export default class PermaTecBot extends Bot {
     const allSubs = Subscriptions.getAllSubs();
     const fullPub = Query.getFullPublicationToday(day);
 
-    let inputImgs = fullPub.imgs.map(img => {
+    let inputImgs = fullPub.imgs.map((img: PubImage) => {
       return new InputFile(path.join(DbCache.Config.ImagesPath, img.Name));
     });
 
