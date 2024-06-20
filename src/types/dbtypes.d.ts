@@ -1,6 +1,6 @@
 //Db types Entities
 
-interface Image {
+interface PubImage {
   PublicationDay: number;
   Name: string;
 }
@@ -14,5 +14,5 @@ type FullPublication = {
   found: boolean;
   day: number;
   message: string;
-  imgs: Image[];
+  imgs: PubImage[];
 };
