@@ -11,7 +11,7 @@
     "buildsoft": "tsc --build --clean && tsc --build",
     "build-tsc": "tsc --build --clean && tsc --build",
     "build-exes": "pkg . -t latest-linux-x64,latest-win-x64 --out-path bin/",
-    "build-copy": "cpy .env config.json imgs/ permabotdb.db bin"
+    "build-copy": "cpy public/**/* imgs/ bin"
   },
   "keywords": [],
   "author": "",
