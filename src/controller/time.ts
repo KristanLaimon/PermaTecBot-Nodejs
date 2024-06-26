@@ -25,10 +25,14 @@ export default class Time {
     }, 1000);
   }
 
+  /**
+   * First day is day 1 not 0!!
+   * @returns number days from starting day 1
+   */
   static getDaysFromStartingDate(): number {
     let startingDay = moment(DbCache.Config.StartingDay);
     let today = moment();
-    return today.diff(startingDay, "days");
+    return today.diff(startingDay, "days") + 1;
   }
 
   static setupLocaleTimeConfig(): void {

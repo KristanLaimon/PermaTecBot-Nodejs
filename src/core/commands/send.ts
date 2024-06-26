@@ -1,14 +1,7 @@
-//Dependencies
-import { Context, InputFile } from "grammy";
-import path from "path";
-
 //View Layer
 import PermaTecBot, { BotMode } from "../permatecbot";
 
 //Controller Layer
-import DbCache from "../../controller/db_cache";
-import Query from "../../controller/query";
-import Time from "../../controller/time";
 import Subscriptions from "../../controller/subscriptions";
 
 function Publication_Command(bot: PermaTecBot) {
@@ -24,8 +17,8 @@ function Publication_Command(bot: PermaTecBot) {
         } else {
           ctx.reply("Tienes que estar suscrito para mandarte esto");
         }
-      }else{
-        ctx.reply("ばか");
+      } else {
+        ctx.reply("En ese día no hay publicaciones");
       }
     });
   });

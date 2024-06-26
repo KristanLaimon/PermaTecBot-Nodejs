@@ -10,7 +10,7 @@ function PermaDays_Command(bot: PermaTecBot) {
     let daysPassed = Time.getDaysFromStartingDate();
 
     const strBuilder = [];
-    strBuilder.push(`☀️ Días transcurridos: ${daysPassed} días`);
+    strBuilder.push(`☀️ Día actual: ${daysPassed}`);
     strBuilder.push(`📅 Inicio del Server: ${startingDay.format("LL")}`);
     let msg = strBuilder.join("\n");
 
