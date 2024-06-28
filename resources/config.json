@@ -1,10 +1,10 @@
 {
   "StartingDay": "2024-06-20",
-  "DatabasePath": "./permabotdb.db",
+  "DatabasePath": "./resources/permabotdb.db",
   "CommandsPath": "commands",
-  "ImagesPath": "./imgs/",
+  "ImagesPath": "./resources/imgs/",
   "WatingReponseTimeSpan": 3000,
-  "RulesPath": "./rules.md",
+  "RulesPath": "./resources/rules.md",
   "BotMessages": [
     {
       "Title": "start",

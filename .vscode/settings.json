@@ -7,16 +7,5 @@
       "name": "PermaBot"
     }
   ],
-  "files.exclude": {
-    ".vscode": true,
-    "node_modules": true,
-    ".env": true,
-    ".env-deletethis": true,
-    ".gitignore": true,
-    ".prettierrc": true,
-    "package-lock.json": true,
-    "package.json": true,
-    "README.md": true,
-    "tsconfig.json": true
-  }
+  "files.exclude": {}
 }

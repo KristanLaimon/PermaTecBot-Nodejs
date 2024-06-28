@@ -7,6 +7,6 @@ export default class DbJson {
   }
 
   static readConfigJson(): ConfigJson {
-    return this.readJsonFile("./config.json") as ConfigJson;
+    return this.readJsonFile("./resources/config.json") as ConfigJson;
   }
 }
