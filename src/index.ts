@@ -5,8 +5,6 @@ const args = process.argv.slice(2);
 if (args[0] && args[0] === "--no-warnings") {
   process.emitWarning = () => {};
 }
-const sqlite = require("better-sqlite3"); //Neccesary to load dependency at exe build
-
 console.log("Argumentos leídos y aceptados");
 
 import PermaTecBot from "./core/permatecbot";

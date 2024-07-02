@@ -2,8 +2,11 @@ version: "3"
 
 services:
   permabot:
-    image: permabot:v1
+    build:
+      context: .
+      dockerfile: dockerfile
     ports:
       - "443:443"
       - "80:80"
       - "8443:8443"
+    container_name: permabot
